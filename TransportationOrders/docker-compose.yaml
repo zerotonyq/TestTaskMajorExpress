@@ -1,0 +1,10 @@
+version: "3.8"
+services: 
+  db: 
+    image: postgres:12.19-alpine3.20
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=orders_db
+    ports:
+      - "8090:5432"

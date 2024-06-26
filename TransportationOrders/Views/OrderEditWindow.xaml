@@ -1,0 +1,35 @@
+﻿<Window x:Class="TransportationOrders.OrderEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TransportationOrders"
+        mc:Ignorable="d"
+        Title="Редактирование заявки" Height="140" Width="772">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,58">
+            <Label Content="Идентификатор" Height="26"  Width="103"/>
+            <Label Content="Описание"  Height="26"  Width="200"/>
+            <Label Content="Статус"  Height="26"  Width="84"/>
+            <Label Content="Курьер"  Height="26"  Width="84"/>
+            <Label Visibility="{Binding IsCancelMessageVisible,  Converter={StaticResource BooleanToVisibilityConverter}}" Content="Причина отмены"  Height="26"  Width="123"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,58,0,0">
+            <Label Content="{Binding CurrentOrder.Id}" Height="26"  Width="103"/>
+            <TextBox Text="{Binding Description}" Height="38"  Width="202" VerticalScrollBarVisibility="Visible" IsHitTestVisible="{Binding CanEditOrderData}"/>
+            <ComboBox  SelectedIndex="0" Height="23" ItemsSource="{Binding Statuses}"
+                      SelectedItem="{Binding Status}" Width="92"/>
+            <ComboBox   Height="23" ItemsSource="{Binding CourierIds}"
+                       SelectedItem="{Binding CourierId}" Width="100">
+            </ComboBox>
+            <TextBox Text="{Binding CancelMessage}" Visibility="{Binding IsCancelMessageVisible,  Converter={StaticResource BooleanToVisibilityConverter}}" Width="134" Height="37"/>
+            <Button Content="Сохранить" Height="25" Margin="20,0,0,0" Command="{Binding SaveOrderCommand}"></Button>
+        </StackPanel>
+
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,40 @@
+﻿<Window x:Class="TransportationOrders.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TransportationOrders"
+        mc:Ignorable="d"
+        Title="Заявки на перевозки" Height="523" Width="760" 
+        >
+    <Grid>
+
+        <Button Content="Создать заявку" HorizontalAlignment="Left" Margin="430,37,0,0" VerticalAlignment="Top" Command ="{Binding Path=AddOrderCommand}"/>
+
+        <TextBox Text="{Binding SearchPattern}" HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184"   Height="20" />
+
+        <Button Command ="{Binding SearchOrderCommand}" CommandParameter="{Binding SearchPattern}" Content="Найти заявку" HorizontalAlignment="Left" Margin="212,37,0,0" VerticalAlignment="Top"/>
+
+        <ListBox ItemsSource="{Binding Orders}" Margin="10,104,10,10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <MenuItem Header="{Binding Id}" Width="150" IsHitTestVisible="False"/>
+                        <Label Content="{Binding Status}" Width="70"/>
+                        <TextBox Text="{Binding Description}" VerticalScrollBarVisibility="Visible" Width="100" IsHitTestVisible="False"/>
+                        <Label Content="{Binding CourierId}" Width="80" Margin="100,0,0,0"/>
+                        <Button Content="Удалить заявку" Command="{Binding DataContext.DeleteOrderCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Id}"/>
+                        <Button Content="Редактировать заявку" Command="{Binding DataContext.OrderEditCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Id}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Orientation="Horizontal" Margin="10,62,169,385">
+            <Label Content="Идентификатор" Margin="30,0,0,0"/>
+            <Label Content="Статус" Margin="30,0,0,0"/>
+            <Label Content="Описание" Margin="30,0,0,0"/>
+            <Label Content="Идентификатор курьера" Margin="30,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
